@@ -1,5 +1,21 @@
+import NuxtConfiguration from '@nuxt/config'
+import consola from 'consola'
+import { environments } from './src/plugins/environments'
 
-export default {
+if (!process.env.CI) {
+  Object.entries(environments).forEach(([key, value]) => {
+    if (['browser', 'client', 'mode', 'modern', 'server', 'static'].includes(key)) {
+      return
+    }
+    if (environments[key] === undefined || environments[key] === null) {
+      consola.error(`Missing environment variable: '${key}'`)
+      process.exit(1)
+    }
+  })
+}
+
+const config: NuxtConfiguration = {
+  srcDir: 'src',
   mode: 'universal',
   /*
   ** Headers of the page
@@ -28,13 +44,15 @@ export default {
   ** Plugins to load before mounting the App
   */
   plugins: [
+    '~/plugins/environments.ts'
   ],
+  env: {
+    APP_NAME: process.env.APP_NAME!
+  },
   /*
   ** Nuxt.js modules
   */
-  modules: [
-    '@nuxtjs/eslint-module'
-  ],
+  modules: [],
   /*
   ** Build configuration
   */
@@ -46,3 +64,5 @@ export default {
     }
   }
 }
+
+export default config

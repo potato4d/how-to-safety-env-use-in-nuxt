@@ -1,9 +1,8 @@
 <template>
   <div class="container">
     <div>
-      <logo />
       <h1 class="title">
-        how-to-safety-env-use-in-nuxt
+        {{ appname }}
       </h1>
       <h2 class="subtitle">
         My remarkable Nuxt.js project
@@ -28,14 +27,16 @@
   </div>
 </template>
 
-<script>
-import Logo from '~/components/Logo.vue'
-
-export default {
-  components: {
-    Logo
+<script lang="ts">
+import Vue from 'vue'
+export default Vue.extend({
+  computed: {
+    appname(): string {
+      const appname = process.env.APP_NAME as string
+      return appname
+    }
   }
-}
+})
 </script>
 
 <style>

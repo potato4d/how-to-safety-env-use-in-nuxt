@@ -5,13 +5,15 @@ module.exports = {
     node: true
   },
   parserOptions: {
-    parser: 'babel-eslint'
+    parser: '@typescript-eslint/parser'
   },
   extends: [
     '@nuxtjs',
+    '@vue/typescript',
     'plugin:nuxt/recommended'
   ],
   // add your custom rules here
   rules: {
+    'no-directly-use-process': 'error'
   }
 }
