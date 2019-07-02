@@ -1,6 +1,14 @@
 # how-to-safety-env-use-in-nuxt
 
-> My remarkable Nuxt.js project
+## Structure
+
+- Typesafe environments
+  - Inject to Vue prototype object
+  - Overwrite Vue SFC type definition
+- Failsafe launch application
+  - Automatically terminate the process if no environment variable is found
+- Customized ESLint rule
+  - Prohibit direct use of process.env
 
 ## Build Setup
 
